@@ -90,7 +90,7 @@ const HomePage: React.FC = () => {
     }
   };
   
-  // Specific Analysis Functions Using the Reusable fetchBookData
+  // Specific Analysis Functions
   const analyzeCharacters = () => fetchBookData('analyze-characters/', 'Characters', 'characters');
   const analyzeSentiment = () => fetchBookData('analyze-sentiment/', 'Sentiment', 'sentiment');
   const detectLanguage = () => fetchBookData('detect-language/', 'Language', 'language');
