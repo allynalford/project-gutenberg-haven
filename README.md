@@ -3,6 +3,8 @@
 
  Project Gutenberg is a platform to download and access free e-books. A web application that allows users to explore and analyze books from Project Gutenberg. 
 
+### Project Structure
+
  **⚙️ Core Functionality** 
 
 1. Input field for users to enter a Project Gutenberg book ID.
@@ -19,3 +21,19 @@ Given the text the user can perform text analysis. Using Groq Fast AI Inference 
 - Sentiment Analysis
 - Plot Summary
 - Extract Theme
+
+
+
+### Installation
+
+**Clone the repository**
+   ```bash
+   git clone https://github.com/allynalford/project-gutenberg-haven.git
+   cd your-repo
+
+   ### Configuration
+
+Provide any environment variables or configuration steps if required.
+
+#### Example `.env` file:
+REACT_APP_API_URL=http://localhost:3001/
