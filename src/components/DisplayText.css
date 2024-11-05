@@ -1,0 +1,21 @@
+
+.reader-mode-container {
+    width: 100%;              /* Full width of the parent container */
+    max-width: 800px;         /* Max width for readability */
+    margin: 0 auto;           /* Center alignment */
+    padding: 20px;            /* Padding for spacing */
+    font-family: 'Georgia', serif; /* Reader-friendly font */
+    font-size: 1.1rem;        /* Slightly larger font for readability */
+    line-height: 1.6;         /* Increased line height */
+    color: #333;              /* Dark color for readability */
+  }
+  
+  .reader-mode-container p {
+    margin: 1.2em 0;          /* Space between paragraphs */
+    text-align: justify;      /* Justify text for reader mode */
+  }
+  
+  .reader-mode-container p:last-child {
+    margin-bottom: 0;         /* Remove bottom margin from the last paragraph */
+  }
+  
