@@ -12,7 +12,7 @@
 
 🧠 **Text Analysis**
 
-Given the text the user can perform text analysis.
+Given the text the user can perform text analysis. Using Groq Fast AI Inference SambaNova Cloud
 
 - Identify key characters
 - Language Detection
