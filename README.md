@@ -24,20 +24,13 @@ Given the text the user can perform text analysis. Using Groq Fast AI Inference 
 
 
 
-### Installation
-
-**Clone the repository**
-   ```bash
-   git clone https://github.com/allynalford/project-gutenberg-haven.git
-   cd your-repo
+### Setup
 
 
-   ```bash
-Provide any environment variable for API.
+Provide environment variable for API.
 
 REACT_APP_API_URL=http://localhost:3001/
 
-   ```bash
 Start the application
 
 npm run dev
