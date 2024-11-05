@@ -1,7 +1,7 @@
 # project-gutenberg-haven
  Project Gutenberg frontend in ReactJS
 
- Project Gutenberg is a platform to download and access free e-books. We're looking to build a web application that allows users to explore and analyze books from Project Gutenberg. 
+ Project Gutenberg is a platform to download and access free e-books. A web application that allows users to explore and analyze books from Project Gutenberg. 
 
  **⚙️ Core Functionality** 
 
