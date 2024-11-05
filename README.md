@@ -3,6 +3,9 @@
 
  Project Gutenberg is a platform to download and access free e-books. A web application that allows users to explore and analyze books from Project Gutenberg. 
 
+##
+LIVE DEMO URL: https://main.d15o6tr2xe1g64.amplifyapp.com/
+
 ### Project Structure
 
  **⚙️ Core Functionality** 
