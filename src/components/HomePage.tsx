@@ -145,15 +145,13 @@ const HomePage: React.FC = () => {
 
       {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
       <br /><hr />
-      <h2>Previously accessed books</h2>
-      <ListGroup as="ol" numbered>
-        {viewedBooks.map((book: any, lineIndex) => (
-          <ListGroup.Item key={lineIndex} as="li">{book.title} -   ID: {book.id} </ListGroup.Item>
-        ))}
-      </ListGroup>
-
-
-
+      {viewedBooks.length > 0 && (<><h2>Previously accessed books</h2>
+        <ListGroup as="ol" numbered>
+          {viewedBooks.map((book: any, lineIndex) => (
+            <ListGroup.Item key={lineIndex} as="li">{book.title} -   ID: {book.id} </ListGroup.Item>
+          ))}
+        </ListGroup></>)}
+        
       {book && (
         <div>
           <hr />
