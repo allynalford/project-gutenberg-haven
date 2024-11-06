@@ -138,39 +138,46 @@ const HomePage: React.FC = () => {
   return (
     <Container className="mt-5">
       <h1>Access Project Gutenberg Books</h1>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-        <FloatingLabel
-        controlId="floatingInput"
-        label="Enter Book ID"
-        className="mb-3"
-      >
-          <Form.Control
-            type="number"
-            required
-            placeholder="Enter Project Gutenberg Book ID"
-            value={bookId}
-            onChange={(e) => setBookId(e.target.value)}
-          />
-           </FloatingLabel>
-          <Form.Control.Feedback type="invalid">
-            Please Enter Project Gutenberg Book ID.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Button variant="primary" className="mt-3" onClick={fetchBook} disabled={disableLookup}>
-          {disableLookup && (<Spinner
-            as="span"
-            animation="grow"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />)}
-          {buttonTxt}
-        </Button>
-      </Form>
+      <Card style={{ width: 'auto'}}>
+        <Card.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Enter Book ID"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="number"
+                    required
+                    placeholder="Enter Project Gutenberg Book ID"
+                    value={bookId}
+                    onChange={(e) => setBookId(e.target.value)}
+                  />
+                </FloatingLabel>
+                <Form.Control.Feedback type="invalid">
+                  Please Enter Project Gutenberg Book ID.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Button variant="primary" className="mt-3" onClick={fetchBook} disabled={disableLookup}>
+                {disableLookup && (<Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />)}
+                {buttonTxt}
+              </Button>
+            </Form>
+          </Card.Body>
+          
+          {error && <Card.Footer><Alert variant="danger" className="mt-3">{error}</Alert></Card.Footer>}
+      </Card>
 
-      {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
-      <br /><hr />
+
+      
+      <hr />
       {viewedBooks.length > 0 && (<><h2>Previously accessed books</h2>
         <ListGroup as="ol" numbered>
           {viewedBooks.map((book: any, lineIndex) => (
@@ -206,15 +213,17 @@ const HomePage: React.FC = () => {
               />)}
           </Form.Group>
           {analyzed && (<hr />)}
-          <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-              {!analyze && (<h2>{analyzedType}</h2>)}
-              <Accordion.Body>
-                {analyzed}
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          <hr />
+          {analyzed && (<Card style={{ width: 'auto', marginBottom: '25px' }}>
+            <Card.Body>
+              <Card.Title>{analyzedType}</Card.Title>
+              <Card.Body>
+                <div className="reader-mode-container">
+                  {formatTextForReactUI(analyzed)}
+                </div>
+              </Card.Body>
+            </Card.Body>
+          </Card>)}
+
           <Card style={{ width: 'auto' }}>
             <Card.Body>
               <Card.Title>{book.title} By: {book.author}</Card.Title>
