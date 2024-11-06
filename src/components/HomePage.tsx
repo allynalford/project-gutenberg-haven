@@ -142,37 +142,43 @@ const HomePage: React.FC = () => {
         Access Project Gutenberg Books
         </Card.Header>
         <Card.Body>
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <FloatingLabel
-                  controlId="floatingInput"
-                  label="Enter Book ID"
-                  className="mb-3"
-                >
-                  <Form.Control
-                    type="number"
-                    required
-                    placeholder="Enter Project Gutenberg Book ID"
-                    value={bookId}
-                    onChange={(e) => setBookId(e.target.value)}
-                  />
-                </FloatingLabel>
-                <Form.Control.Feedback type="invalid">
-                  Please Enter Project Gutenberg Book ID.
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Button variant="primary" className="mt-3" onClick={fetchBook} disabled={disableLookup}>
-                {disableLookup && (<Spinner
-                  as="span"
-                  animation="grow"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />)}
-                {buttonTxt}
-              </Button>
-            </Form>
-          </Card.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="floatingInput">
+              <Row>
+                <Col xs={3}>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Enter Book ID"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      type="number"
+                      required
+                      placeholder="Enter Project Gutenberg Book ID"
+                      value={bookId}
+                      onChange={(e) => setBookId(e.target.value)}
+                    />
+                  </FloatingLabel>
+                  <Form.Control.Feedback type="invalid">
+                    Please Enter Project Gutenberg Book ID.
+                  </Form.Control.Feedback>
+                </Col>
+                <Col xs={9}>
+                  <Button variant="primary" className="mt-3" onClick={fetchBook} disabled={disableLookup}>
+                    {disableLookup && (<Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />)}
+                    {buttonTxt}
+                  </Button>
+                </Col>
+              </Row>
+            </Form.Group>
+          </Form>
+        </Card.Body>
           
           {error && <Card.Footer><Alert variant="danger" className="mt-3">{error}</Alert></Card.Footer>}
       </Card>
