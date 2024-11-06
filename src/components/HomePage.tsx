@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -102,10 +102,11 @@ const HomePage: React.FC = () => {
       setButtonTxt("Fetch Book");
     } catch (err: any) {
       console.error(err.message);
-      setAnalyze(true);
+      setAnalyze(false);
       setError('Failed to fetch book data. Please check the ID and try again.');
       setDisableLookup(false);
       setButtonTxt("Fetch Book");
+      setBook(null);
     }
   };
   
@@ -139,13 +140,22 @@ const HomePage: React.FC = () => {
       <h1>Access Project Gutenberg Books</h1>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Enter Book ID</Form.Label>
+        <FloatingLabel
+        controlId="floatingInput"
+        label="Enter Book ID"
+        className="mb-3"
+      >
           <Form.Control
-            type="text"
+            type="number"
+            required
             placeholder="Enter Project Gutenberg Book ID"
             value={bookId}
             onChange={(e) => setBookId(e.target.value)}
           />
+           </FloatingLabel>
+          <Form.Control.Feedback type="invalid">
+            Please Enter Project Gutenberg Book ID.
+          </Form.Control.Feedback>
         </Form.Group>
         <Button variant="primary" className="mt-3" onClick={fetchBook} disabled={disableLookup}>
           {disableLookup && (<Spinner
