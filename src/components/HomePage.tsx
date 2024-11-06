@@ -87,7 +87,7 @@ const HomePage: React.FC = () => {
       const fetchedBook: Book = { id: bookId, title, author, textContent };
   
       // Update the viewed books list in local storage
-      updateViewedBooks(bookId, title);
+      updateViewedBooks(bookId, title, author);
   
       setBook(fetchedBook);
       setAnalyze(false);
@@ -103,13 +103,13 @@ const HomePage: React.FC = () => {
   };
   
   // Helper function to update the viewed books list in local storage
-  const updateViewedBooks = (bookId: string, title: string) => {
+  const updateViewedBooks = (bookId: string, title: string, author: string) => {
     const viewedBooks = JSON.parse(localStorage.getItem('viewedBooks') || '[]');
     // Check if the book is already in the viewed list
     const isBookAlreadyViewed = viewedBooks.some((book: { id: string }) => book.id === bookId);
   
     if (!isBookAlreadyViewed) {
-      viewedBooks.push({ id: bookId, title });
+      viewedBooks.push({ id: bookId, title, author});
       localStorage.setItem('viewedBooks', JSON.stringify(viewedBooks));
     }
   };
@@ -148,7 +148,7 @@ const HomePage: React.FC = () => {
       {viewedBooks.length > 0 && (<><h2>Previously accessed books</h2>
         <ListGroup as="ol" numbered>
           {viewedBooks.map((book: any, lineIndex) => (
-            <ListGroup.Item key={lineIndex} as="li">{book.title} -   ID: {book.id} </ListGroup.Item>
+            <ListGroup.Item key={lineIndex} as="li">{book.title} By: {book.author} -   ID: {book.id} </ListGroup.Item>
           ))}
         </ListGroup></>)}
         
