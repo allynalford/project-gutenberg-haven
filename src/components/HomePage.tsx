@@ -5,12 +5,8 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import './DisplayText.css';
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  textContent: string;
-}
+import Book from '../interfaces/IBook';
+
 
 const HomePage: React.FC = () => {
   const [bookId, setBookId] = useState('');
