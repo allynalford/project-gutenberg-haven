@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Form, Button, Alert, FloatingLabel, Badge } from 'react-bootstrap';
+import { Container, Form, Button, Alert, FloatingLabel, Badge, Col, Row } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
@@ -136,8 +136,15 @@ const HomePage: React.FC = () => {
   
   return (
     <Container className="mt-5">
-      <h1>Access Project Gutenberg Books</h1>
+      <Container fluid="md">
+      <Row>
+        <Col xs={2}><img src='image.jpg' alt="Project Gutenberg Books"/></Col>
+      </Row>
+    </Container>
       <Card style={{ width: 'auto'}}>
+        <Card.Header>
+        Access Project Gutenberg Books
+        </Card.Header>
         <Card.Body>
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -173,16 +180,21 @@ const HomePage: React.FC = () => {
           
           {error && <Card.Footer><Alert variant="danger" className="mt-3">{error}</Alert></Card.Footer>}
       </Card>
-
-
-      
       <hr />
-      {viewedBooks.length > 0 && (<><h2>Previously accessed books</h2>
-        <ListGroup as="ol" numbered>
-          {viewedBooks.map((book: any, lineIndex) => (
-            <ListGroup.Item key={lineIndex} as="li">{book.title} By: {book.author} -  <Badge bg="success">{book.id}</Badge></ListGroup.Item>
-          ))}
-        </ListGroup></>)}
+      {viewedBooks.length > 0 && (<>
+        <Card style={{ width: 'auto' }}>
+          <Card.Header>
+            Previously accessed books
+          </Card.Header>
+          <Card.Body>
+            <ListGroup as="ol" numbered>
+              {viewedBooks.map((book: any, lineIndex) => (
+                <ListGroup.Item key={lineIndex} as="li">{book.title} By: {book.author} -  <Badge bg="success">{book.id}</Badge></ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Card.Body>
+        </Card>
+      </>)}
         
       {book && (
         <div>
@@ -224,8 +236,10 @@ const HomePage: React.FC = () => {
           </Card>)}
 
           <Card style={{ width: 'auto' }}>
+          <Card.Header>
+          {book.title} By: {book.author}
+          </Card.Header>
             <Card.Body>
-              <Card.Title>{book.title} By: {book.author}</Card.Title>
               <Card.Body>
               <div className="reader-mode-container">
               {formatTextForReactUI(removeAsterisksText(book.textContent))}
