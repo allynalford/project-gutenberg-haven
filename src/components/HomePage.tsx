@@ -217,7 +217,7 @@ const HomePage: React.FC = () => {
           <hr />
           <Card style={{ width: 'auto' }}>
             <Card.Body>
-              <Card.Title>{book.title} | By: {book.author}</Card.Title>
+              <Card.Title>{book.title} By: {book.author}</Card.Title>
               <Card.Body>
               <div className="reader-mode-container">
               {formatTextForReactUI(removeAsterisksText(book.textContent))}
