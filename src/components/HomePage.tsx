@@ -4,6 +4,7 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Spinner from 'react-bootstrap/Spinner';
 import './DisplayText.css';
 interface Book {
   id: string;
@@ -20,7 +21,8 @@ const HomePage: React.FC = () => {
   const [analyze, setAnalyze] = useState<boolean>(true);
   const [analyzed, setAnalyzed] = useState<string>("");
   const [analyzedType, setAnalyzedType] = useState<string>("");
-  const [viewedBooks, setViewedBooks] = useState([])
+  const [viewedBooks, setViewedBooks] = useState([]);
+  const [buttonTxt, setButtonTxt] = useState<string>("Fetch Book");
 
   // Fetch saved books from local storage on component mount
   useEffect(() => {
@@ -59,6 +61,7 @@ const HomePage: React.FC = () => {
     }
   
     try {
+      setAnalyze(true);
       const response = await axios.get(`${process.env.REACT_APP_API_URL}${urlSuffix}${bookId}`);
       const result = response.data[dataKey];
       
@@ -68,7 +71,7 @@ const HomePage: React.FC = () => {
       setAnalyze(false);
     } catch (err: any) {
       console.error(err.message);
-      setAnalyze(true);
+      setAnalyze(false);
       setError(`Failed to ${type.toLowerCase()} for the book.`);
     }
   };
@@ -81,7 +84,9 @@ const HomePage: React.FC = () => {
   
     try {
       setError('');
+      setAnalyze(true);
       setDisableLookup(true);
+      setButtonTxt("Loading...");
       const response = await axios.get(`${process.env.REACT_APP_API_URL}book/${bookId}`);
       const { title, author, textContent } = response.data;
       const fetchedBook: Book = { id: bookId, title, author, textContent };
@@ -94,11 +99,13 @@ const HomePage: React.FC = () => {
       setAnalyzed('');
       setAnalyzedType('');
       setDisableLookup(false);
+      setButtonTxt("Fetch Book");
     } catch (err: any) {
       console.error(err.message);
       setAnalyze(true);
       setError('Failed to fetch book data. Please check the ID and try again.');
       setDisableLookup(false);
+      setButtonTxt("Fetch Book");
     }
   };
   
@@ -140,7 +147,16 @@ const HomePage: React.FC = () => {
             onChange={(e) => setBookId(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary"  className="mt-3" onClick={fetchBook} disabled={disableLookup}>Fetch Book</Button>
+        <Button variant="primary" className="mt-3" onClick={fetchBook} disabled={disableLookup}>
+          {disableLookup && (<Spinner
+            as="span"
+            animation="grow"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />)}
+          {buttonTxt}
+        </Button>
       </Form>
 
       {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
@@ -156,11 +172,28 @@ const HomePage: React.FC = () => {
         <div>
           <hr />
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Button variant="primary" disabled={analyze} className="mt-3" onClick={analyzeCharacters} style={{ marginRight: '25px' }}>Analyze Characters</Button>
-            <Button variant="primary" disabled={analyze} className="mt-3" onClick={analyzeSentiment} style={{ marginRight: '25px' }}>Analyze Sentiment</Button>
-            <Button variant="primary" disabled={analyze} className="mt-3" onClick={detectLanguage} style={{ marginRight: '25px' }}>Detect Language</Button>
-            <Button variant="primary" disabled={analyze} className="mt-3" onClick={extractThemes} style={{ marginRight: '25px' }}>Extract Themes</Button>
-            <Button variant="primary" disabled={analyze} className="mt-3" onClick={summarizePlot} style={{ marginRight: '25px' }}>Summarize Plot</Button>
+            <Button variant="primary" disabled={analyze} className="mt-3" onClick={analyzeCharacters} style={{ marginRight: '25px' }}>
+              {analyze ? 'Loading...' : 'Analyze Characters'}
+            </Button>
+            <Button variant="primary" disabled={analyze} className="mt-3" onClick={analyzeSentiment} style={{ marginRight: '25px' }}>
+              {analyze ? 'Loading...' : 'Analyze Sentiment'}
+            </Button>
+            <Button variant="primary" disabled={analyze} className="mt-3" onClick={detectLanguage} style={{ marginRight: '25px' }}>
+              {analyze ? 'Loading...' : 'Detect Language'}
+            </Button>
+            <Button variant="primary" disabled={analyze} className="mt-3" onClick={extractThemes} style={{ marginRight: '25px' }}>
+              {analyze ? 'Loading...' : 'Extract Themes'}
+            </Button>
+            <Button variant="primary" disabled={analyze} className="mt-3" onClick={summarizePlot} style={{ marginRight: '50px' }}>
+              {analyze ? 'Loading...' : 'Summarize Plot'}
+            </Button>
+            {analyze && (<Spinner
+                as="span"
+                animation="border" 
+                variant="primary"
+                role="status"
+                aria-hidden="true"
+              />)}
           </Form.Group>
           {analyzed && (<hr />)}
           <Accordion defaultActiveKey="0">
