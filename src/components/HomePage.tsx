@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
+import { Container, Form, Button, Alert, FloatingLabel, Badge } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -181,7 +181,7 @@ const HomePage: React.FC = () => {
       {viewedBooks.length > 0 && (<><h2>Previously accessed books</h2>
         <ListGroup as="ol" numbered>
           {viewedBooks.map((book: any, lineIndex) => (
-            <ListGroup.Item key={lineIndex} as="li">{book.title} By: {book.author} -   ID: {book.id} </ListGroup.Item>
+            <ListGroup.Item key={lineIndex} as="li">{book.title} By: {book.author} -  <Badge bg="success">{book.id}</Badge></ListGroup.Item>
           ))}
         </ListGroup></>)}
         
